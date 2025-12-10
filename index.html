@@ -39,10 +39,48 @@
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to the Simple HTML Document</h1>
-        <p>This page contains an iframe that embeds another simple website below:</p>
+        <h1>Welcome to the My Web Page</h1>
+        <p>This page contains content from MonkeyTech:</p>
         
-        <iframe src="embedded.html" title="Embedded Simple Website"></iframe>
+        <iframe id="myIframe" title="Embedded Simple Website"></iframe>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+    <script>
+        // Set iframe source dynamically with JavaScript
+        const iframe = document.getElementById('myIframe');
+        const iframeUrl = generateLink();
+        // console.log(iframeUrl);
+        iframe.src = iframeUrl;
+
+        function generateLink() {
+            const { loginName, salt, hash } = this.hashPassword('apic', '1');
+            const link = `https://web.monkeytech.co.th:8070/embed?n=apic&p=${salt}&h=${hash}&u=5104&r=3&l=14&a=orschedule`;
+            return link;
+        }
+
+        function hashPassword(pLoginName, pPassword) {
+            const loginName = pLoginName && pLoginName ? pLoginName.trim() : '';
+            if (!loginName || loginName.length <= 0) {
+                return { loginName: '', salt: '', hash: '', hashedPassword: '' };
+            }
+            const md5Hash = CryptoJS.MD5(pPassword);
+            const hashedPassword = CryptoJS.enc.Base64.stringify(md5Hash);
+            const salt = genRandomText(7) + (new Date()).getTime().toString();
+            const hash = CryptoJS.SHA256(loginName + ':' + hashedPassword + salt).toString();
+            return { loginName, salt, hash, hashedPassword };
+        }
+
+        function genRandomText(length) {
+            var result = '';
+            var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            var charactersLength = characters.length;
+            for (var i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+            }
+            return result;
+        }
+
+    </script>
 </body>
 </html>
