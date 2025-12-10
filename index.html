@@ -54,7 +54,7 @@
         iframe.src = iframeUrl;
 
         function generateLink() {
-            const { loginName, salt, hash } = this.hashPassword('apic', '1');
+            const { loginName, salt, hash } = this.hashPassword('apic', 'xMpCOKC5I4INzFCab3WEmw==');
             const link = `https://web.monkeytech.co.th:8070/embed?n=apic&p=${salt}&h=${hash}&u=5104&r=3&l=14&a=orschedule`;
             return link;
         }
@@ -64,8 +64,7 @@
             if (!loginName || loginName.length <= 0) {
                 return { loginName: '', salt: '', hash: '', hashedPassword: '' };
             }
-            const md5Hash = CryptoJS.MD5(pPassword);
-            const hashedPassword = CryptoJS.enc.Base64.stringify(md5Hash);
+            const hashedPassword = pPassword;
             const salt = genRandomText(7) + (new Date()).getTime().toString();
             const hash = CryptoJS.SHA256(loginName + ':' + hashedPassword + salt).toString();
             return { loginName, salt, hash, hashedPassword };
