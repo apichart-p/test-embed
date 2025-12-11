@@ -39,7 +39,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to the My Web Page</h1>
+        <h1>Welcome to My Web Page</h1>
         <p>This page contains content from MonkeyTech:</p>
         
         <iframe id="myIframe" title="Embedded Simple Website"></iframe>
@@ -55,7 +55,7 @@
 
         function generateLink() {
             const { loginName, salt, hash } = this.hashPassword('apic', 'xMpCOKC5I4INzFCab3WEmw==');
-            const link = `https://web.monkeytech.co.th:8070/embed?n=apic&p=${salt}&h=${hash}&u=5104&r=3&l=14&a=orschedule&readonly=false`;
+            const link = `https://web.monkeytech.co.th:8070/embed?n=apic&p=${salt}&h=${hash}&u=5104&r=3&l=14&a=orschedule&readonly=true`;
             return link;
         }
 
